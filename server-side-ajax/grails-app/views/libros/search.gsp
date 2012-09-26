@@ -5,40 +5,24 @@
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
 		<title>Busqueda de libros - ajax</title>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<g:javascript library='jquery' />
+		<r:layoutResources/>
 
 		<script language="javascript"><!--
-			var id;
-			var ajaxRequest = createAjaxRequest();
-
-			function createAjaxRequest() {
-				if (typeof XMLHttpRequest != "undefined") {
-					return new XMLHttpRequest();
-				} 
-				else if (window.ActiveXObject) {
-					return new ActiveXObject("Microsoft.XMLHTTP");
-				}
-			}
-
 			function cambiarLibro(nuevoId) {
-				var url = "" + nuevoId;
-
-				ajaxRequest.open("GET", url, true);
-				ajaxRequest.onreadystatechange = updateLibro;
-				ajaxRequest.send(null);
+				$.ajax({
+					url: "" + nuevoId, 
+					complete: function(response) {
+						if (response.status == 200) {
+							document.getElementById("libro").innerHTML = response.responseText;
+				        }
+				        else {
+				        	alert("No se pudieron obtener los detalles del libro " + id + "\n" + 
+				        	      "Por un error: " + response.status + response.statusText);
+				        }
+			        }
+				})			
 			}
-			
-			function updateLibro() {
-			    if (ajaxRequest.readyState == 4) {
-			        if (ajaxRequest.status == 200) {
-						document.getElementById("libro").innerHTML = ajaxRequest.responseText;
-			        }
-			        else {
-			        	alert("No se pudieron obtener los detalles del libro " + id + "\n" + 
-			        	      "Por un error: " + ajaxRequest.status + ajaxRequest.statusText);
-			        }
-			    }
-			}		
-			
 
 		--></script>
 	</head>
