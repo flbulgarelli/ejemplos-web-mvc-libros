@@ -7,10 +7,10 @@ Hay tres versiones:
  * mvc lado cliente (TODO)
  
 TODO
- * migrar jquery
  * agregar los css
- * usar templates
- * corregir la vista de detalle del mvc ajaxiano
+ * usar templates o partials (darle layour consistente a las paginas)
+ * agregar una home
+ 
 
 
 
